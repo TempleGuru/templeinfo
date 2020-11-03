@@ -1,0 +1,258 @@
+<head>
+  <title> TempleGuru.in </title>
+  <style>
+    div#header{
+      font-size: 24px;
+      margin: 12px 0px;
+    }
+    .title{
+      font-weight: bold;
+    }
+    div#container {
+    margin: 0 2%;
+    width: 96%;
+}
+    div#templeView {
+      text-align: left;
+}
+#moreOption span {
+    padding: 0px 10px;
+}
+    iframe {
+    width: 100%;
+}
+.title span {
+    display: block;
+    float: left;
+}
+div#basicInfo {
+    display: inline;
+}
+.saffron{
+  color: #FF9933;
+}
+.titleColor{
+  color: #1497b5;
+}
+.bgTitleColor{
+  background-color: #1497b5 !important;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+i.arrow {
+    float: right;
+}
+#contentArrow{
+  margin-top: 6px;
+  display: inline;
+  float: right;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.show{
+  display: block;
+}
+.hide{
+  display: none;
+}
+.tabs {
+    margin-top: 12px;
+}
+.tabs .tab {
+    background-color: #FF9933;
+    /* color: blue; */
+    border-radius: 7px;
+    padding: 5px;
+}
+#tabContent{
+  margin-top: 10px;
+}
+
+div#tabContent.pdf iframe {
+    height: 500px;
+    width: 100%;
+}
+div#tabContent.audio iframe {
+    width: 100%;
+    height: auto;
+}
+.loadMore{
+  text-align: center; 
+  color: #FF9933;
+  display: block;
+}
+#tabContent.show{
+  background: Blue;
+}
+
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div id="header">
+    <span class="saffron">&#9784;</span> 
+    <span class="title titleColor">TempleGuru</span>
+  </div>
+  <div id="container">
+      <div id="templeView">
+
+          <div class="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/J8gKJ_OKN6Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+          <div id="basicInfo">
+            <span class="title"> Sri Venkateswara Swami Temple, Tirupati</span> <i class="arrow down"></i>
+            <span> 1800 425 4141 / 0877 227 7777 </span>
+            <span> https://www.tirumala.org/</span>
+            <div class="more hide">
+              
+
+              <div class="tabs">
+                  <span class="pdfTab tab">PDF</span>
+                  <span class="audioTab tab">Audio</span>
+                  <span class="bookingTab tab">Booking</span>
+                  <span class="mapTab tab">Map</span>
+              </div>
+
+             
+            <div id="tabContent" class="pdf show">
+              <iframe src="https://drive.google.com/file/d/18WsjDqxtMrERT9k7_LpxBIN2qYdyaApI/preview" width="640" height="480"></iframe>
+              <span class="loadMore">Show More</span>
+            </div>
+            <div id="tabContent" class="audio hide">
+              <iframe src="https://drive.google.com/file/d/1avidminYwtaOxntF_r3eUa-llub5adwE/preview" width="640" height="480"></iframe>
+              <iframe src="https://drive.google.com/file/d/18HvLTjnHvePFAgO_-H4LJtSYberFRsMw/preview" width="640" height="480"></iframe>
+              <span class="loadMore">Show More</span>
+            </div>
+            <div id="tabContent" class="booking hide">
+              <a href=""> Go To Online Darshan Tickets Booking</a>
+              <span class="loadMore">Show More</span>
+            </div>
+            <div id="tabContent" class="map hide">
+                  MAP changed
+            </div>
+            
+            </div>
+          </div>
+          
+      </div>
+    </div>
+  <script>
+    // Moving the arrow up and down when clicks on it.
+    let contentArrow = document.querySelector(".arrow");
+    let moreElement = document.querySelector(".more");
+    contentArrow.addEventListener("click", function(event){
+
+      if(contentArrow.classList.contains('down')){
+        contentArrow.classList.remove('down');
+        contentArrow.classList.add('up');
+        moreElement.classList.remove('hide');
+        moreElement.classList.add('show');
+
+      }else{
+        contentArrow.classList.remove('up');
+        contentArrow.classList.add('down');
+        moreElement.classList.remove('show');
+        moreElement.classList.add('hide');
+      }
+    });
+// Tabs click
+
+    let tabElement = document.querySelector(".tabs");
+    tabElement.addEventListener("click", function(event){ 
+      if(event.target.classList.contains('pdfTab')){
+        pdfTab();   
+      }
+      if(event.target.classList.contains('audioTab')){
+        audioTab();
+      }
+      if(event.target.classList.contains('bookingTab')){
+        bookingTab();   
+      }
+      if(event.target.classList.contains('mapTab')){
+        mapTab();   
+      }
+
+    });
+
+  // Switch between tabs
+  function pdfTab(){
+    let element = document.querySelector("#tabContent.pdf");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.audio");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.booking");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.map");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+
+
+  }
+  function audioTab(){
+    let element = document.querySelector("#tabContent.audio");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.pdf");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.booking");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.map");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+  }
+  function bookingTab(){
+    let element = document.querySelector("#tabContent.booking");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.pdf");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.audio");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.map");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+  }
+  function mapTab(){
+    let element = document.querySelector("#tabContent.map");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.pdf");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.audio");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.booking");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+  }
+
+
+
+    
+
+  </script>
+</body>

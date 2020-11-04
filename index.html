@@ -208,12 +208,19 @@ div#tabContent.booking span {
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
 
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.add('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
+
 
   }
   function audioTab(){
     let element = document.querySelector("#tabContent.audio");
     element.classList.remove('hide');
     element.classList.add('show');
+    
     // hide others
     let otherElement = document.querySelector("#tabContent.pdf");
     otherElement.classList.remove('show');
@@ -224,6 +231,12 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.map");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.add('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
   }
   function bookingTab(){
     let element = document.querySelector("#tabContent.booking");
@@ -239,6 +252,12 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.map");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.add('bgTitleColor');
+    document.querySelector(".apTab.tab").classList.remove('bgTitleColor');
   }
   function mapTab(){
     let element = document.querySelector("#tabContent.map");
@@ -254,6 +273,12 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.booking");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".mapTab.tab").classList.add('bgTitleColor');
   }
 
 

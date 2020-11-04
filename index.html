@@ -124,6 +124,7 @@ div#tabContent.booking span {
                   <span class="audioTab tab">Audio</span>
                   <span class="bookingTab tab">Latest News</span>
                   <span class="mapTab tab">Map</span>
+                  <span class="booksTab tab">Books</span>
               </div>
 
              
@@ -139,7 +140,10 @@ div#tabContent.booking span {
             <div id="tabContent" class="booking hide">
 
              
-              <span> Accommodation quota for Tirumala location for the month of November 2020 will be available for booking with effective from 28-October-2020 11:00 A.M onwards
+              <span>
+                Latest News from TTD: 
+                <hr>
+                Accommodation quota for Tirumala location for the month of November 2020 will be available for booking with effective from 28-October-2020 11:00 A.M onwards
                 <hr>
                 Special Entry Darshan quota for the month of November 2020 will be available for booking with effective from 27-October-2020 11:00 A.M onwards</span>
               <!-- <span>Darshan tickets and Accomodation:</span>
@@ -153,7 +157,10 @@ div#tabContent.booking span {
             <div id="tabContent" class="map hide">
                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15506.425613211159!2d79.3377254684981!3d13.681680983221945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b562cc4e1291%3A0x85a1996b4b87bcf6!2sTirumala%2C%20Tirupati%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1604419471885!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
             </div>
-            
+            <div id="tabContent" class="books hide">
+                <iframe src="https://drive.google.com/file/d/1Oonzi66dSlC4rwsNUUjl_CBk1AsPlNJ8/preview" width="640" height="480"></iframe>
+                <span class="loadMore">Show More</span>
+            </div>
             </div>
           </div>
           
@@ -194,6 +201,10 @@ div#tabContent.booking span {
       if(event.target.classList.contains('mapTab')){
         mapTab();   
       }
+      if(event.target.classList.contains('booksTab')){
+        booksTab();   
+      }
+      
 
     });
 
@@ -212,12 +223,16 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.map");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.books");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
 
     //Tab bg Color change
     document.querySelector(".pdfTab.tab").classList.add('bgTitleColor');
     document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
 
 
   }
@@ -236,12 +251,16 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.map");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.books");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
 
     //Tab bg Color change
     document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".audioTab.tab").classList.add('bgTitleColor');
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
   }
   function bookingTab(){
     let element = document.querySelector("#tabContent.booking");
@@ -257,12 +276,16 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.map");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.books");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
 
     //Tab bg Color change
     document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".bookingTab.tab").classList.add('bgTitleColor');
     document.querySelector(".apTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
   }
   function mapTab(){
     let element = document.querySelector("#tabContent.map");
@@ -278,14 +301,43 @@ div#tabContent.booking span {
     otherElement = document.querySelector("#tabContent.booking");
     otherElement.classList.remove('show');
     otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.books");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
 
     //Tab bg Color change
     document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.add('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
   }
+  function booksTab(){
+    let element = document.querySelector("#tabContent.books");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.pdf");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.audio");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.booking");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.map");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
 
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.add('bgTitleColor');
+
+  }
 
 
     

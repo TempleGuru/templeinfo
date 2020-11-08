@@ -126,6 +126,7 @@ div#tabContent.booking span {
                   <span class="bookingTab tab">Latest News</span>
                   <span class="mapTab tab">Map</span>
                   <span class="booksTab tab">Books</span>
+                <span class="calendarTab tab">Map</span>
               </div>
 
              
@@ -162,6 +163,11 @@ div#tabContent.booking span {
                 <iframe src="https://drive.google.com/file/d/1Oonzi66dSlC4rwsNUUjl_CBk1AsPlNJ8/preview" width="640" height="480"></iframe>
                 <span class="loadMore">Show More</span>
             </div>
+              <div id="tabContent" class="calendar hide">
+                <iframe src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
+                <span class="loadMore">Show More</span>
+            </div>
+              
             </div>
           </div>
           
@@ -205,6 +211,9 @@ div#tabContent.booking span {
       if(event.target.classList.contains('booksTab')){
         booksTab();   
       }
+      if(event.target.classList.contains('calendarTab')){
+        calendarTab();   
+      }
       
 
     });
@@ -234,6 +243,7 @@ div#tabContent.booking span {
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.remove('bgTitleColor');  
 
 
   }
@@ -262,6 +272,7 @@ div#tabContent.booking span {
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.remove('bgTitleColor');  
   }
   function bookingTab(){
     let element = document.querySelector("#tabContent.booking");
@@ -287,6 +298,7 @@ div#tabContent.booking span {
     document.querySelector(".bookingTab.tab").classList.add('bgTitleColor');
     document.querySelector(".apTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.remove('bgTitleColor');  
   }
   function mapTab(){
     let element = document.querySelector("#tabContent.map");
@@ -312,6 +324,7 @@ div#tabContent.booking span {
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.add('bgTitleColor');
     document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.remove('bgTitleColor');  
   }
   function booksTab(){
     let element = document.querySelector("#tabContent.books");
@@ -337,8 +350,40 @@ div#tabContent.booking span {
     document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
     document.querySelector(".booksTab.tab").classList.add('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.remove('bgTitleColor');  
 
   }
+    function calendarTab(){
+    let element = document.querySelector("#tabContent.calendar");
+    element.classList.remove('hide');
+    element.classList.add('show');
+    // hide others
+    let otherElement = document.querySelector("#tabContent.pdf");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.audio");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.booking");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+    otherElement = document.querySelector("#tabContent.map");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+      otherElement = document.querySelector("#tabContent.books");
+    otherElement.classList.remove('show');
+    otherElement.classList.add('hide');
+
+    //Tab bg Color change
+    document.querySelector(".pdfTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".audioTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".bookingTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".mapTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".booksTab.tab").classList.remove('bgTitleColor');
+    document.querySelector(".calendarTab.tab").classList.add('bgTitleColor');  
+
+  }
+    
 
 
     

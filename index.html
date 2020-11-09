@@ -98,7 +98,28 @@ div#tabContent.booking span {
     display: block;
     padding: 3px;
 }
+.listing:after {
+    content: ' \2261';
+    }
+.listing{
+  float: right;
+  font-size: 25px;
 
+}
+.close:after {
+    content: ' \2573';
+    }
+.close {
+    float: right;
+    font-size: 12px;
+    line-height: 0;
+}
+#headerContainer span {
+    display: block;
+    text-align: center;
+    padding: 4px;
+    border: 3px #1497b5 solid;
+}
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -106,7 +127,16 @@ div#tabContent.booking span {
   <div id="header">
     <span class="saffron">&#9784;</span> 
     <span class="title titleColor">TempleGuru</span>
+    <div id="menu">
+      <span class="listing show"></span>
+      <span class="close hide"></span>
+    </div>
   </div>
+  <div id="headerContainer" class="hide">
+    <span class="home"> Home </span> 
+    <span class="calendar"> Calendar </span>
+    <span class="contactus"> Contact Us </span>
+  </div> 
   <div id="container">
       <div id="templeView">
 
@@ -175,6 +205,37 @@ div#tabContent.booking span {
       </div>
     </div>
   <script>
+    //Menu Clicking - Show / Hide Menu list
+    let menuElement = document.querySelector(".menu");
+    let listingElement = document.querySelector(".listing");
+    let closeElement = document.querySelector(".close");
+    let headerContainer = document.querySelector("#headerContainer");
+    menu.addEventListener("click", function(event){
+      console.log(event);
+      if(listingElement.classList.contains('show')){
+        headerContainer.classList.remove('hide');
+        headerContainer.classList.add('show');
+
+        listingElement.classList.remove('show');
+        listingElement.classList.add('hide');
+        closeElement.classList.remove('hide');
+        closeElement.classList.add('show');
+
+
+
+
+      }else{
+        headerContainer.classList.remove('show');
+        headerContainer.classList.add('hide');
+
+        listingElement.classList.remove('hide');
+        listingElement.classList.add('show');
+        closeElement.classList.remove('show');
+        closeElement.classList.add('hide');
+      }
+
+      });   
+    
     // Moving the arrow up and down when clicks on it.
     let contentArrow = document.querySelector(".arrow");
     let moreElement = document.querySelector(".more");

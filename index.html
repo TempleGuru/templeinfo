@@ -98,10 +98,10 @@ div#tabContent.booking span {
     display: block;
     padding: 3px;
 }
-.listing:after {
+.menu:after {
     content: ' \2261';
     }
-.listing{
+.menu{
   float: right;
   font-size: 25px;
 
@@ -112,13 +112,17 @@ div#tabContent.booking span {
 .close {
     float: right;
     font-size: 12px;
-    line-height: 0;
+    line-height: 12px;
 }
 #headerContainer span {
     display: block;
     text-align: center;
     padding: 4px;
-    border: 3px #1497b5 solid;
+}
+div#headerContainer {
+    background-color: #FF9933;
+    width: 96%;
+    margin: 0 2%;
 }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,13 +131,11 @@ div#tabContent.booking span {
   <div id="header">
     <span class="saffron">&#9784;</span> 
     <span class="title titleColor">TempleGuru</span>
-    <div id="menu">
-      <span class="listing show"></span>
-      <span class="close hide"></span>
-    </div>
+     <span class="menu"></span>
   </div>
   <div id="headerContainer" class="hide">
-    <span class="home"> Home </span> 
+    <span class="close"></span>
+    <span class="home"> Home </span>  
     <span class="calendar"> Calendar </span>
     <span class="contactus"> Contact Us </span>
   </div> 
@@ -208,33 +210,29 @@ div#tabContent.booking span {
     //Menu Clicking - Show / Hide Menu list
     let menuElement = document.querySelector(".menu");
     let listingElement = document.querySelector(".listing");
-    let closeElement = document.querySelector(".close");
+    
     let headerContainer = document.querySelector("#headerContainer");
-    menu.addEventListener("click", function(event){
-      console.log(event);
-      if(listingElement.classList.contains('show')){
+
+    menuElement.addEventListener("click", function(event){
+     if(headerContainer.classList.contains('hide')){
         headerContainer.classList.remove('hide');
         headerContainer.classList.add('show');
-
-        listingElement.classList.remove('show');
-        listingElement.classList.add('hide');
-        closeElement.classList.remove('hide');
-        closeElement.classList.add('show');
-
-
-
-
       }else{
         headerContainer.classList.remove('show');
         headerContainer.classList.add('hide');
-
-        listingElement.classList.remove('hide');
-        listingElement.classList.add('show');
-        closeElement.classList.remove('show');
-        closeElement.classList.add('hide');
       }
+    });
 
-      });   
+    //Menu listing close icon - Click event
+    let closeElement = document.querySelector(".close");
+    closeElement.addEventListener("click", function(event){
+     if(headerContainer.classList.contains('show')){
+        headerContainer.classList.remove('show');
+        headerContainer.classList.add('hide');
+      }
+    });
+    
+    
     
     // Moving the arrow up and down when clicks on it.
     let contentArrow = document.querySelector(".arrow");

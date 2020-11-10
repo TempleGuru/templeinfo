@@ -103,7 +103,7 @@ div#tabContent.booking span {
     }
 .menu{
   float: right;
-  font-size: 30px;
+  font-size: 25px;
 
 }
 .close:after {
@@ -111,8 +111,8 @@ div#tabContent.booking span {
     }
 .close {
     float: right;
-    font-size: 15px;
-    line-height: 15px;
+    font-size: 12px;
+    line-height: 12px;
 }
 #headerContainer span {
     display: block;
@@ -121,9 +121,23 @@ div#tabContent.booking span {
 }
 div#headerContainer {
     background-color: #FF9933;
-    width: 96%;
     margin: 0 2%;
+
+    position: fixed;
+    top: 12px;
+    height: 20% ;
+    z-index: 100;
+
+    transition: width 4s ease-in-out 1s;
+
 }
+.width96{
+  width: 96%;
+}
+.width0{
+  width: 0%;
+}
+
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -133,7 +147,7 @@ div#headerContainer {
     <span class="title titleColor">TempleGuru</span>
      <span class="menu"></span>
   </div>
-  <div id="headerContainer" class="hide">
+  <div id="headerContainer" class="hide width0">
     <span class="close"></span>
     <span class="home"> Home </span>  
     <span class="calendar"> Calendar </span>
@@ -217,9 +231,13 @@ div#headerContainer {
      if(headerContainer.classList.contains('hide')){
         headerContainer.classList.remove('hide');
         headerContainer.classList.add('show');
+        
+        headerContainer.classList.remove('width0');
+        headerContainer.classList.add('width96');
       }else{
         headerContainer.classList.remove('show');
         headerContainer.classList.add('hide');
+        
       }
     });
 

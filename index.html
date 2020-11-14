@@ -99,43 +99,43 @@ div#tabContent.booking span {
     padding: 3px;
 }
 .menu:after {
-    content: ' \2261';
+    content: '\2261';
+    font-size: 24px;
+    line-height: 24px;
     }
-.menu{
-  float: right;
-  font-size: 25pt;
 
-}
 .close:after {
-    content: ' \2573';
+    content: '\2573';
+    font-size: 18px;
+    line-height: 18px;
+    float: left;
+    
     }
-.close {
-    float: right;
-    font-size: 12pt;
-    line-height: 12px;
-}
+
 #headerContainer span {
     display: block;
     text-align: center;
     padding: 4px;
 }
 div#headerContainer {
-    background-color: #FF9933;
-    margin: 0 2%;
+    -webkit-transition: all 2s ease;  
+    -moz-transition: all 2s ease;  
+    -o-transition: all 2s ease;  
+    -ms-transition: all 2s ease;  
+    transition: all 0.5s ease;
 
+}
+#headerContainer{
+    background-color: rgba(ff, 99, 33, 0.9);
+    background-color: white;
+    display: block;
     position: fixed;
-    top: 12px;
-    height: 20% ;
-    z-index: 100;
+    top: 0;
+    right: 0;
+    height: 100% ;
+    width: 0%;
+    z-index: 10;
 
-    transition: width 4s ease-in-out 1s;
-
-}
-.width96{
-  width: 96%;
-}
-.width0{
-  width: 0%;
 }
 
   </style>
@@ -145,9 +145,9 @@ div#headerContainer {
   <div id="header">
     <span class="saffron">&#9784;</span> 
     <span class="title titleColor">TempleGuru</span>
-     <span class="menu"></span>
+    <span class="menu"></span>
   </div>
-  <div id="headerContainer" class="hide width0">
+  <div id="headerContainer" class="">
     <span class="close"></span>
     <span class="home"> Home </span>  
     <span class="calendar"> Calendar </span>
@@ -228,15 +228,11 @@ div#headerContainer {
     let headerContainer = document.querySelector("#headerContainer");
 
     menuElement.addEventListener("click", function(event){
-     if(headerContainer.classList.contains('hide')){
-        headerContainer.classList.remove('hide');
-        headerContainer.classList.add('show');
-        
-        headerContainer.classList.remove('width0');
-        headerContainer.classList.add('width96');
+      console.log(headerContainer.style.width);
+     if(headerContainer.style.width == "0%"){
+        headerContainer.style.width = "70%";
       }else{
-        headerContainer.classList.remove('show');
-        headerContainer.classList.add('hide');
+        headerContainer.style.width = "0%";
         
       }
     });
@@ -244,9 +240,11 @@ div#headerContainer {
     //Menu listing close icon - Click event
     let closeElement = document.querySelector(".close");
     closeElement.addEventListener("click", function(event){
-     if(headerContainer.classList.contains('show')){
-        headerContainer.classList.remove('show');
-        headerContainer.classList.add('hide');
+      if(headerContainer.style.width == "0%"){
+        headerContainer.style.width = "70%";
+      }else{
+        headerContainer.style.width = "0%";
+        
       }
     });
     

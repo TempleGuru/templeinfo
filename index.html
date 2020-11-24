@@ -71,7 +71,7 @@ i.arrow {
     margin-top: 12px;
     width: 111%;
 }
-.tabs .tab {
+.tabs .tab, #tabContent .back, #months .prevMonth, #months .nextMonth{
     background-color: #FF9933;
     /* color: blue; */
     border-radius: 7px;
@@ -144,6 +144,11 @@ span.tabViewTitle {
 }
 div#months {
     text-align: center;
+    margin: 21px;
+}
+span.currentMonth {
+    text-decoration: underline;
+    padding: 0 21px;
 }
 
   </style>
@@ -230,7 +235,7 @@ div#months {
       </div>
       <div id="calendarView" class="hide">
         <div id="tabContent" class="calendar show">
-          <span class="back"> < BACK </span>
+          <span class="back bgTitleColor"> < BACK </span>
           <span class="tabViewTitle"> Calendar: 2020</span>
           <iframe src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
           <!-- <span class="loadMore">Show More</span> -->
@@ -506,6 +511,10 @@ div#months {
     document.querySelector(".calendarTab.tab").classList.add('bgTitleColor');  
 
   }
-   
+    
+
+
+    
+
   </script>
 </body>

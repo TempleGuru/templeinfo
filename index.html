@@ -138,6 +138,13 @@ div#headerContainer {
     z-index: 10;
 
 }
+span.tabViewTitle {
+    display: block;
+    text-align: center;
+}
+div#months {
+    text-align: center;
+}
 
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,12 +157,13 @@ div#headerContainer {
   </div>
   <div id="headerContainer" class="">
     <span class="close"></span>
+    <span> &nbsp;</span>
     <span class="home"> Home </span>  
     <span class="calendar"> Calendar </span>
     <span class="contactus"> Contact Us </span>
   </div> 
   <div id="container">
-      <div id="templeView">
+      <div id="templeView" class="show">
 
           <div class="video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/J8gKJ_OKN6Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -174,7 +182,7 @@ div#headerContainer {
                   <span class="bookingTab tab">News</span>
                   <span class="mapTab tab">Map</span>
                   <span class="booksTab tab">Book</span>
-                <span class="calendarTab tab">Calendar</span>
+                  <!-- <span class="calendarTab tab">Calendar</span> -->
               </div>
 
              
@@ -220,8 +228,46 @@ div#headerContainer {
           </div>
           
       </div>
+      <div id="calendarView" class="hide">
+        <div id="tabContent" class="calendar show">
+          <span class="back"> < BACK </span>
+          <span class="tabViewTitle"> Calendar: 2020</span>
+          <iframe src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
+          <!-- <span class="loadMore">Show More</span> -->
+          <div  id="months">
+            <span class="prevMonth"><<</span>&nbsp;&nbsp;&nbsp; 
+            <span class="currentMonth"> Present</span>&nbsp;&nbsp;&nbsp;
+            <span class="nextMonth">>></span>
+          </div>
+        </div>
+      </div> <!-- End of Calendar View-->
     </div>
   <script>
+
+    //Container Views Change 
+    let calendarElement = document.querySelector(".calendar");
+    let templeViewElement = document.querySelector("#templeView");
+    let calendarViewElement = document.querySelector("#calendarView");
+    let backElement = document.querySelector(".back");
+    
+    calendarElement.addEventListener("click", function(event){
+      headerContainer.style.width = "0%";
+      templeViewElement.classList.remove('show');
+      templeViewElement.classList.add('hide');
+      calendarViewElement.classList.remove('hide');
+      calendarViewElement.classList.add('show');
+
+      
+    })
+
+    backElement.addEventListener("click", function(event){
+      templeViewElement.classList.remove('hide');
+      templeViewElement.classList.add('show');
+      calendarViewElement.classList.remove('show');
+      calendarViewElement.classList.add('hide');
+      
+    })
+
     //Menu Clicking - Show / Hide Menu list
     let menuElement = document.querySelector(".menu");
     let listingElement = document.querySelector(".listing");
@@ -460,10 +506,6 @@ div#headerContainer {
     document.querySelector(".calendarTab.tab").classList.add('bgTitleColor');  
 
   }
-    
-
-
-    
-
+   
   </script>
 </body>

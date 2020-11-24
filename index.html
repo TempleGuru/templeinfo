@@ -168,7 +168,7 @@ span.currentMonth {
     <span class="contactus"> Contact Us </span>
   </div> 
   <div id="container">
-      <div id="templeView" class="show">
+      <div id="templeView" class="hide">
 
           <div class="video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/J8gKJ_OKN6Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -233,7 +233,7 @@ span.currentMonth {
           </div>
           
       </div>
-      <div id="calendarView" class="hide">
+      <div id="calendarView" class="show">
         <div id="tabContent" class="calendar show">
           <span class="back bgTitleColor"> < BACK </span>
           <span class="tabViewTitle"> Calendar: 2020</span>
@@ -248,6 +248,26 @@ span.currentMonth {
       </div> <!-- End of Calendar View-->
     </div>
   <script>
+
+    // Processing months
+    let nextMonthElement = document.querySelector(".nextMonth");
+    nextMonthElement.addEventListener("click", function(event){
+        loadData();
+    });
+
+    function loadData(){
+      let xhttp = new XMLHttpRequest();
+      let calendarDataURL = "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data";
+      xhttp.open("GET", calendarDataURL);
+      xhttp.send();
+      xhttp.onreadystatechange = function(data){
+        console.log(data.calendar);
+      }
+
+
+    }
+
+    
 
     //Container Views Change 
     let calendarElement = document.querySelector(".calendar");

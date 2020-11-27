@@ -116,7 +116,10 @@ div#tabContent.booking span {
 #headerContainer span {
     display: block;
     text-align: center;
-    padding: 4px;
+    padding: 15px;
+}
+#headerContainer span:hover {
+    color: #F93;
 }
 div#headerContainer {
     -webkit-transition: all 2s ease;  
@@ -163,9 +166,9 @@ span.currentMonth {
   <div id="headerContainer" class="">
     <span class="close"></span>
     <span> &nbsp;</span>
-    <span class="home"> Home </span>  
-    <span class="calendar"> Calendar </span>
-    <span class="contactus"> Contact Us </span>
+    <span class="home titleColor"> Home </span>  
+    <span class="calendar titleColor"> Calendar </span>
+    <span class="contactus titleColor"> Contact Us </span>
   </div> 
   <div id="container">
       <div id="templeView" class="hide">
@@ -179,7 +182,7 @@ span.currentMonth {
             <span> 1800 425 4141 / 0877 227 7777 </span>
             <span> https://www.tirumala.org/</span>
             <div class="more hide">
-              
+                 
 
               <div class="tabs">
                   <span class="pdfTab tab bgTitleColor">PDF</span>
@@ -237,8 +240,9 @@ span.currentMonth {
         <div id="tabContent" class="calendar show">
           <span class="back bgTitleColor"> < BACK </span>
           <span class="tabViewTitle"> Calendar: 2020</span>
-          <iframe src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
+          <iframe id="calendariframe" title="Telugu Calendar" src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
           <!-- <span class="loadMore">Show More</span> -->
+          <!-- allowfullscreen target="_parent" -->
           <div  id="months">
             <span class="prevMonth"><<</span>&nbsp;&nbsp;&nbsp; 
             <span class="currentMonth"> Present</span>&nbsp;&nbsp;&nbsp;
@@ -249,21 +253,49 @@ span.currentMonth {
     </div>
   <script>
 
+    localStorage.removeItem("calendar");
+    loadData();
+    let currentMonth = 10;
     // Processing months
     let nextMonthElement = document.querySelector(".nextMonth");
     nextMonthElement.addEventListener("click", function(event){
-        loadData();
+      currentMonth = currentMonth + 1;
+      showCalendar(currentMonth);
+
     });
+    let prevMonthElement = document.querySelector(".prevMonth");
+    prevMonthElement.addEventListener("click", function(event){
+      currentMonth = currentMonth - 1;
+      showCalendar(currentMonth);
 
-    function loadData(){
-      let xhttp = new XMLHttpRequest();
-      let calendarDataURL = "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data";
-      xhttp.open("GET", calendarDataURL);
-      xhttp.send();
-      xhttp.onreadystatechange = function(data){
-        console.log(data.calendar);
-      }
+    });
+    
+    function showCalendar(month){
+      let calendarElement = document.querySelector("#calendariframe");
+       let data = JSON.parse(localStorage.getItem("calendar"));
+       calendarElement.src = JSON.parse(data).calendar[month];
+    }
 
+    function loadData(callback){
+      if(localStorage.getItem("calendar") == null){
+            let xhttp = new XMLHttpRequest();
+            let calendarDataURL = "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data";
+            xhttp.open("GET", calendarDataURL);
+            xhttp.send();
+            xhttp.onreadystatechange = function(){
+              let response;
+              if (this.readyState == 4 && this.status == 200){
+                response = xhttp.responseText;
+                localStorage.setItem("calendar", JSON.stringify(response));
+                if(callback)
+                  callback();
+              }
+            }
+          }else{
+            if(callback)
+              callback();
+          }   
+          
 
     }
 

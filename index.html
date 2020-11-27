@@ -279,6 +279,14 @@ span.currentMonth {
       showCalendar(currentYear,currentMonth);
 
     });
+    let curMonthElement = document.querySelector(".currentMonth");
+    curMonthElement.addEventListener("click", function(event){
+      currentMonth = new Date().getMonth();
+      currentYear = new Date().getFullYear();
+      showCalendar(currentYear,currentMonth);
+
+    });
+    
     
     function showCalendar(year,month){
       console.log("showCalendar: " + year +"  " +month);

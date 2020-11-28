@@ -259,7 +259,7 @@ span.currentMonth {
         <div id="tabContent" class="calendar show">
           <span class="back bgTitleColor"> < BACK </span>
           <span class="tabViewTitle video"> Video : Bhagvath Geetha </span>
-          <iframe id="videoiframe" title="Telugu Video" src="" width="640" height="480"></iframe>
+          <iframe id="videoiframe" title="Telugu Video" src="" width="640" height="480" allowfullscreen></iframe>
           <!-- <span class="loadMore">Show More</span> -->
           <!-- allowfullscreen target="_parent" -->
           <div  id="videos">
@@ -314,7 +314,7 @@ span.currentMonth {
       tabViewTitleVideoElement.innerHTML = "Video: Bhagavad Gita";
       let videoElement = document.querySelector("#videoiframe");
       let data = JSON.parse(localStorage.getItem("video"));
-       videoElement.src = "https://www.youtube.com/embed/"+JSON.parse(data).video[videoNumber];
+       videoElement.src = "https://www.youtube.com/embed/"+ JSON.parse(data).video[videoNumber];
     }
 
 

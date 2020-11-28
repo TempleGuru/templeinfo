@@ -172,14 +172,15 @@ span.currentMonth {
     <span class="close"></span>
     <span> &nbsp;</span>
     <span class="home titleColor"> Home </span>  
+    <span class="gita titleColor">  Bhagavad Gita </span>
     <span class="calendar titleColor"> Calendar </span>
     <span class="contactus titleColor"> Contact Us </span>
   </div> 
   <div id="container">
-      <div id="templeView" class="hide">
+      <div id="templeView" class="show">
 
           <div class="video">
-            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/J8gKJ_OKN6Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/J8gKJ_OKN6Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           
           <div id="basicInfo">
@@ -243,7 +244,7 @@ span.currentMonth {
       </div>
       <div id="calendarView" class="hide">
         <div id="tabContent" class="calendar show">
-          <span class="back bgTitleColor"> < BACK </span>
+          <span class="back bgTitleColor calendar"> < BACK </span>
           <span class="tabViewTitle month"> Calendar :  </span>
           <iframe id="calendariframe" title="Telugu Calendar" src="" width="640" height="480"></iframe>
           <!-- <span class="loadMore">Show More</span> -->
@@ -255,10 +256,10 @@ span.currentMonth {
           </div>
         </div>
       </div> <!-- End of Calendar View-->
-      <div id="videoView" class="show">
+      <div id="videoView" class="hide">
         <div id="tabContent" class="calendar show">
-          <span class="back bgTitleColor"> < BACK </span>
-          <span class="tabViewTitle video"> Video : Bhagvath Geetha </span>
+          <span class="back bgTitleColor video"> < BACK </span>
+          <span class="tabViewTitle video"> Video : Bhagavad Gita </span>
           <iframe id="videoiframe" title="Telugu Video" src="" width="640" height="480" allowfullscreen></iframe>
           <!-- <span class="loadMore">Show More</span> -->
           <!-- allowfullscreen target="_parent" -->
@@ -284,9 +285,9 @@ span.currentMonth {
      let currentMonth = new Date().getMonth();
      let currentYear = new Date().getFullYear();
      let currentVideoNumber = 0;
-     loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
+     //loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
     tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
-    tabViewTitleVideoElement.innerHTML = "Video: Bhagvath Geetha.";
+    tabViewTitleVideoElement.innerHTML = "Video: Bhagavad Gita";
     
     // Processing videos
     let nextVideoElement = document.querySelector(".nextVideo");
@@ -392,29 +393,80 @@ span.currentMonth {
 
     
 
-    //Container Views Change 
+    //Menu- Container Views Change 
+    let homeElement = document.querySelector(".home");
+    let gitaElement = document.querySelector(".gita");
     let calendarElement = document.querySelector(".calendar");
-    let templeViewElement = document.querySelector("#templeView");
-    let calendarViewElement = document.querySelector("#calendarView");
-    let backElement = document.querySelector(".back");
     
-    calendarElement.addEventListener("click", function(event){
+    let templeViewElement = document.querySelector("#templeView");
+    let videoViewElement  = document.querySelector("#videoView");
+    let calendarViewElement = document.querySelector("#calendarView");
+
+    let backVideoElement = document.querySelector(".back.video");
+    let backCalendarElement = document.querySelector(".back.calendar");
+
+    
+    homeElement.addEventListener("click", function(event){
+      headerContainer.style.width = "0%";
+      templeViewElement.classList.remove('hide');
+      templeViewElement.classList.add('show');
+      videoViewElement.classList.remove('show');
+      videoViewElement.classList.add('hide');
+      calendarViewElement.classList.remove('show');
+      calendarViewElement.classList.add('hide');
+
+      
+    });
+    gitaElement.addEventListener("click", function(event){
+      loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('show');
       templeViewElement.classList.add('hide');
+      videoViewElement.classList.remove('hide');
+      videoViewElement.classList.add('show');
+      calendarViewElement.classList.remove('show');
+      calendarViewElement.classList.add('hide');
+
+      
+    });
+
+
+    calendarElement.addEventListener("click", function(event){
+      loadData(showCalendar, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data", "calendar");
+      headerContainer.style.width = "0%";
+      templeViewElement.classList.remove('show');
+      templeViewElement.classList.add('hide');
+      videoViewElement.classList.remove('show');
+      videoViewElement.classList.add('hide');
       calendarViewElement.classList.remove('hide');
       calendarViewElement.classList.add('show');
 
       
-    })
-
-    backElement.addEventListener("click", function(event){
+    });
+    
+    backCalendarElement.addEventListener("click", function(event){
+      //headerContainer.style.width = "0%";
+      console.log("backElement :click");
       templeViewElement.classList.remove('hide');
       templeViewElement.classList.add('show');
+      videoViewElement.classList.remove('show');
+      videoViewElement.classList.add('hide');
       calendarViewElement.classList.remove('show');
       calendarViewElement.classList.add('hide');
       
-    })
+    });
+
+    backVideoElement.addEventListener("click", function(event){
+      //headerContainer.style.width = "0%";
+      console.log("backElement :click");
+      templeViewElement.classList.remove('hide');
+      templeViewElement.classList.add('show');
+      videoViewElement.classList.remove('show');
+      videoViewElement.classList.add('hide');
+      calendarViewElement.classList.remove('show');
+      calendarViewElement.classList.add('hide');
+      
+    });
 
     //Menu Clicking - Show / Hide Menu list
     let menuElement = document.querySelector(".menu");

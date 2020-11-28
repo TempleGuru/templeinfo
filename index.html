@@ -142,8 +142,11 @@ div#headerContainer {
 
 }
 span.tabViewTitle {
+    font-size: 21px;
     display: block;
     text-align: center;
+    color: #F93;
+    padding: 10px;
 }
 div#months {
     text-align: center;
@@ -239,8 +242,8 @@ span.currentMonth {
       <div id="calendarView" class="show">
         <div id="tabContent" class="calendar show">
           <span class="back bgTitleColor"> < BACK </span>
-          <span class="tabViewTitle"> Calendar </span>
-          <iframe id="calendariframe" title="Telugu Calendar" src="https://drive.google.com/file/d/1iVxlGrBS7d-TlHj767NsIGgjFQmBtTEu/preview" width="640" height="480"></iframe>
+          <span class="tabViewTitle"> Calendar :  </span>
+          <iframe id="calendariframe" title="Telugu Calendar" src="" width="640" height="480"></iframe>
           <!-- <span class="loadMore">Show More</span> -->
           <!-- allowfullscreen target="_parent" -->
           <div  id="months">
@@ -253,10 +256,17 @@ span.currentMonth {
     </div>
   <script>
 
-    localStorage.removeItem("calendar");
-    loadData();
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
+     let tabViewTitleMonthElement = document.querySelector(".tabViewTitle");
+     let MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+     localStorage.removeItem("calendar");
+    
+     let currentMonth = new Date().getMonth();
+     let currentYear = new Date().getFullYear();
+     loadData();
+    //tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
+    
+
+    
     // Processing months
     let nextMonthElement = document.querySelector(".nextMonth");
     nextMonthElement.addEventListener("click", function(event){
@@ -290,6 +300,7 @@ span.currentMonth {
     
     function showCalendar(year,month){
       console.log("showCalendar: " + year +"  " +month);
+      tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
       let calendarElement = document.querySelector("#calendariframe");
       let data = JSON.parse(localStorage.getItem("calendar"));
        calendarElement.src = JSON.parse(data).calendar[year-2020].months[month];
@@ -306,11 +317,13 @@ span.currentMonth {
               if (this.readyState == 4 && this.status == 200){
                 response = xhttp.responseText;
                 localStorage.setItem("calendar", JSON.stringify(response));
+                showCalendar(currentYear,currentMonth);
                 if(callback)
                   callback();
               }
             }
           }else{
+            showCalendar(currentYear,currentMonth);
             if(callback)
               callback();
           }   

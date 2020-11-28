@@ -71,7 +71,9 @@ i.arrow {
     margin-top: 12px;
     width: 111%;
 }
-.tabs .tab, #tabContent .back, #months .prevMonth, #months .nextMonth{
+.tabs .tab, #tabContent .back,
+#months .prevMonth, #months .nextMonth,
+#videos .prevVideo, #videos .nextVideo {
     background-color: #FF9933;
     /* color: blue; */
     border-radius: 7px;
@@ -148,7 +150,7 @@ span.tabViewTitle {
     color: #F93;
     padding: 10px;
 }
-div#months {
+div#months,div#videos {
     text-align: center;
     margin: 21px;
 }
@@ -239,10 +241,10 @@ span.currentMonth {
           </div>
           
       </div>
-      <div id="calendarView" class="show">
+      <div id="calendarView" class="hide">
         <div id="tabContent" class="calendar show">
           <span class="back bgTitleColor"> < BACK </span>
-          <span class="tabViewTitle"> Calendar :  </span>
+          <span class="tabViewTitle month"> Calendar :  </span>
           <iframe id="calendariframe" title="Telugu Calendar" src="" width="640" height="480"></iframe>
           <!-- <span class="loadMore">Show More</span> -->
           <!-- allowfullscreen target="_parent" -->
@@ -253,18 +255,69 @@ span.currentMonth {
           </div>
         </div>
       </div> <!-- End of Calendar View-->
+      <div id="videoView" class="show">
+        <div id="tabContent" class="calendar show">
+          <span class="back bgTitleColor"> < BACK </span>
+          <span class="tabViewTitle video"> Video : Bhagvath Geetha </span>
+          <iframe id="videoiframe" title="Telugu Video" src="" width="640" height="480"></iframe>
+          <!-- <span class="loadMore">Show More</span> -->
+          <!-- allowfullscreen target="_parent" -->
+          <div  id="videos">
+            <span class="prevVideo"> << </span>&nbsp;&nbsp;&nbsp; 
+            <span class="homeVideo"> Home</span>&nbsp;&nbsp;&nbsp;
+            <span class="nextVideo"> >> </span>
+          </div>
+        </div>
+      </div> <!-- End of Calendar View-->
     </div>
   <script>
 
-     let tabViewTitleMonthElement = document.querySelector(".tabViewTitle");
+
+
+
+
+     let tabViewTitleMonthElement = document.querySelector(".tabViewTitle.month");
+     let tabViewTitleVideoElement = document.querySelector(".tabViewTitle.video");
      let MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
      localStorage.removeItem("calendar");
     
      let currentMonth = new Date().getMonth();
      let currentYear = new Date().getFullYear();
-     loadData();
-    //tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
+     let currentVideoNumber = 0;
+     loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
+    tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
+    tabViewTitleVideoElement.innerHTML = "Video: Bhagvath Geetha.";
     
+    // Processing videos
+    let nextVideoElement = document.querySelector(".nextVideo");
+    nextVideoElement.addEventListener("click", function(event){
+      showVideo(++currentVideoNumber);
+    });
+    let prevVideoElement = document.querySelector(".prevVideo");
+    prevVideoElement.addEventListener("click", function(event){
+      
+      showVideo(--currentVideoNumber);
+
+    });
+    let homeVideoElement = document.querySelector(".homeVideo");
+    homeVideoElement.addEventListener("click", function(event){
+      showVideo(0);
+
+    });
+    
+    
+    function showVideo(videoNumber){
+      if(videoNumber == undefined) 
+          videoNumber = 0;
+      console.log("showVideo: " + videoNumber) ;
+
+      tabViewTitleVideoElement.innerHTML = "Video: Bhagath Geetha";
+      let videoElement = document.querySelector("#videoiframe");
+      let data = JSON.parse(localStorage.getItem("video"));
+       videoElement.src = "https://www.youtube.com/embed/"+JSON.parse(data).video[videoNumber];
+    }
+
+
 
     
     // Processing months
@@ -299,6 +352,10 @@ span.currentMonth {
     
     
     function showCalendar(year,month){
+      if(year == undefined && month == undefined){
+        year = currentYear;
+        month = currentMonth;
+      }
       console.log("showCalendar: " + year +"  " +month);
       tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
       let calendarElement = document.querySelector("#calendariframe");
@@ -306,24 +363,26 @@ span.currentMonth {
        calendarElement.src = JSON.parse(data).calendar[year-2020].months[month];
     }
 
-    function loadData(callback){
-      if(localStorage.getItem("calendar") == null){
+    function loadData(callback,url,storageId){
+      console.log("loadData: " + callback  + " " + url +" " + storageId);
+
+      if(localStorage.getItem(storageId) == null){
             let xhttp = new XMLHttpRequest();
-            let calendarDataURL = "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data";
-            xhttp.open("GET", calendarDataURL);
+            //let calendarDataURL = "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data";
+            xhttp.open("GET", url);
             xhttp.send();
             xhttp.onreadystatechange = function(){
               let response;
               if (this.readyState == 4 && this.status == 200){
                 response = xhttp.responseText;
-                localStorage.setItem("calendar", JSON.stringify(response));
-                showCalendar(currentYear,currentMonth);
+                localStorage.setItem(storageId, JSON.stringify(response));
+                //showCalendar(currentYear,currentMonth);
                 if(callback)
                   callback();
               }
             }
           }else{
-            showCalendar(currentYear,currentMonth);
+            //showCalendar(currentYear,currentMonth);
             if(callback)
               callback();
           }   

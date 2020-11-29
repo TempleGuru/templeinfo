@@ -174,6 +174,7 @@ span.currentMonth {
     <span> &nbsp;</span>
     <span class="home titleColor"> Home </span>  
     <span class="gita titleColor">  Bhagavad Gita </span>
+    <span class="liveDarshan titleColor">  Live Darshan </span>
     <span class="calendar titleColor"> Calendar </span>
     <span class="contactus titleColor"> Contact Us </span>
   </div> 
@@ -202,7 +203,7 @@ span.currentMonth {
 
              
             <div id="tabContent" class="pdf show">
-              <!-- <iframe src="https://drive.google.com/file/d/18WsjDqxtMrERT9k7_LpxBIN2qYdyaApI/preview" width="640" height="480"></iframe> -->
+              <iframe src="https://drive.google.com/file/d/18WsjDqxtMrERT9k7_LpxBIN2qYdyaApI/preview" width="640" height="480"></iframe>
               <span class="loadMore">Show More</span>
             </div>
             <div id="tabContent" class="audio hide">
@@ -377,7 +378,16 @@ span.currentMonth {
       tabViewTitleVideoElement.innerHTML = "Video: Bhagavad Gita";
       let videoElement = document.querySelector("#videoiframe");
       let data = JSON.parse(localStorage.getItem("video"));
-       videoElement.src = "https://www.youtube.com/embed/"+ JSON.parse(data).video[videoNumber];
+      videoElement.src = "https://www.youtube.com/embed/"+ JSON.parse(data).video[videoNumber];
+       
+    }
+
+    function showLiveDarshan(){
+      tabViewTitleVideoElement.innerHTML = "Live: Shree Somnath Temple, First Jyotirlinga - 29-Nov-2020";
+      let videoElement = document.querySelector("#videoiframe");
+      let data = JSON.parse(localStorage.getItem("video"));
+      videoElement.src = "https://www.youtube.com/embed/_vKIBljtuX4";
+
     }
 
 
@@ -458,6 +468,7 @@ span.currentMonth {
     //Menu- Container Views Change 
     let homeElement = document.querySelector(".home");
     let gitaElement = document.querySelector(".gita");
+    let liveDarshanElement = document.querySelector(".liveDarshan");
     let calendarElement = document.querySelector(".calendar");
     
     let templeViewElement = document.querySelector("#templeView");
@@ -488,6 +499,19 @@ span.currentMonth {
       videoViewElement.classList.add('show');
       calendarViewElement.classList.remove('show');
       calendarViewElement.classList.add('hide');
+
+      
+    });
+    liveDarshanElement.addEventListener("click", function(event){
+      loadData(showLiveDarshan, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "liveDarshan");
+      headerContainer.style.width = "0%";
+      templeViewElement.classList.remove('show');
+      templeViewElement.classList.add('hide');
+      videoViewElement.classList.remove('hide');
+      videoViewElement.classList.add('show');
+      calendarViewElement.classList.remove('show');
+      calendarViewElement.classList.add('hide');
+      
 
       
     });

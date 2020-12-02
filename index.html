@@ -124,7 +124,7 @@ div#tabContent.booking span {
 #headerContainer span:hover {
     color: #F93;
 }
-div#headerContainer {
+div#headerContainer, div#moreView {
     -webkit-transition: all 2s ease;  
     -moz-transition: all 2s ease;  
     -o-transition: all 2s ease;  
@@ -145,10 +145,10 @@ div#headerContainer {
 
 }
 span.tabViewTitle {
-    font-size: 21px;
+    font-size: 24px;
     display: block;
     text-align: center;
-    color: #F93;
+    color: 1497b5;
     padding: 10px;
 }
 div#months,div#videos {
@@ -158,6 +158,23 @@ div#months,div#videos {
 span.currentMonth {
     text-decoration: underline;
     padding: 0 21px;
+}
+
+div#moreView {
+    position: fixed;
+    background: white;
+    width: 100%;
+    height: 0;
+    display: block;
+    z-index: 99999;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid #F93;
+    border-radius: 22px 22px 0 0;
+}
+span#moreClose {
+    float: right;
+    padding: 10px;
 }
 
   </style>
@@ -178,6 +195,61 @@ span.currentMonth {
     <span class="calendar titleColor"> Calendar </span>
     <span class="contactus titleColor"> Contact Us </span>
   </div> 
+  <div id="moreView" class="show">
+    <div id="tabContent" class="more show">
+      <span id="moreClose" class="close bgColor more"></span>
+      <span class="tabViewTitle more"> Title:  Sri Venkateswara Swami Temple, Tirupati </span>
+      <div id="moreContent">
+        <div class="more show">
+          <div class="tabs">
+              <span class="pdfTab tab bgTitleColor">PDF</span>
+              <span class="audioTab tab">Audio</span>
+              <span class="bookingTab tab">News</span>
+              <span class="mapTab tab">Map</span>
+              <span class="booksTab tab">Book</span>
+              
+          </div>
+          <div id="tabContent" class="pdf show">
+            <iframe id="templePDF"  width="640" height="480"></iframe>
+            <span class="loadMore">Show More</span>
+          </div>
+          <div id="tabContent" class="audio hide">
+            <iframe id="templeAudio"  width="640" height="480"></iframe>
+            <!-- <iframe src="https://drive.google.com/file/d/18HvLTjnHvePFAgO_-H4LJtSYberFRsMw/preview" width="640" height="480"></iframe> -->
+            <span class="loadMore">Show More</span>
+          </div>
+          <div id="tabContent" class="booking hide">
+
+           
+            <span>
+              Latest News from TTD: 
+              <hr>
+              Accommodation quota for Tirumala location for the month of November 2020 will be available for booking with effective from 28-October-2020 11:00 A.M onwards
+              <hr>
+              Special Entry Darshan quota for the month of November 2020 will be available for booking with effective from 27-October-2020 11:00 A.M onwards</span>
+            <span>Darshan tickets and Accomodation:</span>
+            <span>https://tirupatibalaji.ap.gov.in/</span>
+            <span>Official Site:</span>
+            <span>https://www.tirumala.org/</span>
+            <span>Helpline numbers:</span>
+            <span>1800 425 4141 </span>
+            <span>0877 227 7777 </span>
+          </div>
+          <div id="tabContent" class="map hide">
+                <iframe id="templeMap"  width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+          </div>
+          <div id="tabContent" class="books hide">
+              <iframe id="templeBooks"  width="640" height="480"></iframe>
+              <span class="loadMore">Show More</span>
+          </div>
+          
+        </div> 
+
+
+          
+      </div>
+    </div>
+  </div>  <!-- End of More View-->
   <div id="container">
       <div id="templeView" class="show">
 
@@ -220,13 +292,13 @@ span.currentMonth {
                 Accommodation quota for Tirumala location for the month of November 2020 will be available for booking with effective from 28-October-2020 11:00 A.M onwards
                 <hr>
                 Special Entry Darshan quota for the month of November 2020 will be available for booking with effective from 27-October-2020 11:00 A.M onwards</span>
-              <!-- <span>Darshan tickets and Accomodation:</span>
+              <span>Darshan tickets and Accomodation:</span>
               <span>https://tirupatibalaji.ap.gov.in/</span>
               <span>Official Site:</span>
               <span>https://www.tirumala.org/</span>
               <span>Helpline numbers:</span>
               <span>1800 425 4141 </span>
-              <span>0877 227 7777 </span> -->
+              <span>0877 227 7777 </span>
             </div>
             <div id="tabContent" class="map hide">
                   <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15506.425613211159!2d79.3377254684981!3d13.681680983221945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b562cc4e1291%3A0x85a1996b4b87bcf6!2sTirumala%2C%20Tirupati%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1604419471885!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
@@ -332,8 +404,8 @@ span.currentMonth {
             <span class="nextVideo"> >> </span>
           </div>
         </div>
-      </div> <!-- End of Calendar View-->
-    </div>
+      </div> <!-- End of Video View-->
+    </div> <!-- End of Container-->
   <script>
 
 
@@ -365,7 +437,8 @@ span.currentMonth {
     });
     let homeVideoElement = document.querySelector(".homeVideo");
     homeVideoElement.addEventListener("click", function(event){
-      showVideo(0);
+      currentVideoNumber = 0;
+      showVideo(currentVideoNumber);
 
     });
     
@@ -383,15 +456,12 @@ span.currentMonth {
     }
 
     function showLiveDarshan(){
-      tabViewTitleVideoElement.innerHTML = "Live: Shree Somnath Temple, First Jyotirlinga ";
+      tabViewTitleVideoElement.innerHTML = "Live: Shree Somnath Temple, First Jyotirlinga";
       let videoElement = document.querySelector("#videoiframe");
       let data = JSON.parse(localStorage.getItem("video"));
       videoElement.src = "https://www.youtube.com/embed/qaGdIUmwHuw";
 
     }
-
-
-
     
     // Processing months
     let nextMonthElement = document.querySelector(".nextMonth");
@@ -586,21 +656,33 @@ span.currentMonth {
     // Moving the arrow up and down when clicks on it.
     let contentArrow = document.querySelector(".arrow");
     let moreElement = document.querySelector(".more");
+    let moreViewElement = document.querySelector("#moreView");
+    let templePDFElement = document.querySelector("#templePDF");
+    
     contentArrow.addEventListener("click", function(event){
+        
+        moreViewElement.style.height = "100%";
+        if(templePDFElement.src == "")
+        templePDFElement.src= "https://drive.google.com/file/d/18WsjDqxtMrERT9k7_LpxBIN2qYdyaApI/preview";
+      // if(contentArrow.classList.contains('down')){
+      //   contentArrow.classList.remove('down');
+      //   contentArrow.classList.add('up');
+      //   moreElement.classList.remove('hide');
+      //   moreElement.classList.add('show');
 
-      if(contentArrow.classList.contains('down')){
-        contentArrow.classList.remove('down');
-        contentArrow.classList.add('up');
-        moreElement.classList.remove('hide');
-        moreElement.classList.add('show');
-
-      }else{
-        contentArrow.classList.remove('up');
-        contentArrow.classList.add('down');
-        moreElement.classList.remove('show');
-        moreElement.classList.add('hide');
-      }
+      // }else{
+      //   contentArrow.classList.remove('up');
+      //   contentArrow.classList.add('down');
+      //   moreElement.classList.remove('show');
+      //   moreElement.classList.add('hide');
+      // }
     });
+    let morecloseElement =  document.querySelector("#moreClose");
+    morecloseElement.addEventListener("click", function(event){
+      console.log('more close');
+      moreViewElement.style.height = "0%";
+    });
+
 // Tabs click
 
     let tabElement = document.querySelector(".tabs");
@@ -632,6 +714,9 @@ span.currentMonth {
     let element = document.querySelector("#tabContent.pdf");
     element.classList.remove('hide');
     element.classList.add('show');
+
+    if(templePDFElement.src == "")
+        templePDFElement.src= "https://drive.google.com/file/d/18WsjDqxtMrERT9k7_LpxBIN2qYdyaApI/preview";
     // hide others
     let otherElement = document.querySelector("#tabContent.audio");
     otherElement.classList.remove('show');
@@ -661,6 +746,10 @@ span.currentMonth {
     element.classList.remove('hide');
     element.classList.add('show');
     
+    let templeAudioElement = document.querySelector("#templeAudio");
+    if(templeAudioElement.src == "")
+       templeAudioElement.src= "https://drive.google.com/file/d/1avidminYwtaOxntF_r3eUa-llub5adwE/preview";
+
     // hide others
     let otherElement = document.querySelector("#tabContent.pdf");
     otherElement.classList.remove('show');
@@ -713,6 +802,11 @@ span.currentMonth {
     let element = document.querySelector("#tabContent.map");
     element.classList.remove('hide');
     element.classList.add('show');
+    
+    let templeMapElement = document.querySelector("#templeMap");
+    if(templeMapElement.src == "")
+    templeMapElement.src= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15506.425613211159!2d79.3377254684981!3d13.681680983221945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b562cc4e1291%3A0x85a1996b4b87bcf6!2sTirumala%2C%20Tirupati%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1604419471885!5m2!1sen!2sin";
+    
     // hide others
     let otherElement = document.querySelector("#tabContent.pdf");
     otherElement.classList.remove('show');
@@ -739,6 +833,10 @@ span.currentMonth {
     let element = document.querySelector("#tabContent.books");
     element.classList.remove('hide');
     element.classList.add('show');
+    let templeBooksElement = document.querySelector("#templeBooks");
+    if(templeBooksElement.src == "")
+      templeBooksElement.src= "https://drive.google.com/file/d/1Oonzi66dSlC4rwsNUUjl_CBk1AsPlNJ8/preview";
+    
     // hide others
     let otherElement = document.querySelector("#tabContent.pdf");
     otherElement.classList.remove('show');
@@ -792,7 +890,10 @@ span.currentMonth {
     document.querySelector(".calendarTab.tab").classList.add('bgTitleColor');  
 
   }
-    
+
+// More View 
+
+
 
 
     

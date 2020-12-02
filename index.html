@@ -103,9 +103,10 @@ div#tabContent.booking span {
 }
 .menu:after {
     content: '\2261';
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 40px;
+    line-height: 40px;
     float: right;
+    margin-right: 10px;
     }
 
 .close:after {
@@ -629,7 +630,7 @@ span#moreClose {
     let listingElement = document.querySelector(".listing");
     
     let headerContainer = document.querySelector("#headerContainer");
-
+    headerContainer.style.width = "0%";
     menuElement.addEventListener("click", function(event){
       console.log(headerContainer.style.width);
      if(headerContainer.style.width == "0%"){

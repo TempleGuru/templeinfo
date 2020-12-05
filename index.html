@@ -410,10 +410,6 @@ span#moreClose {
     </div> <!-- End of Container-->
   <script>
 
-
-
-
-
      let tabViewTitleMonthElement = document.querySelector(".tabViewTitle.month");
      let tabViewTitleVideoElement = document.querySelector(".tabViewTitle.video");
      let MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -422,6 +418,7 @@ span#moreClose {
      let currentMonth = new Date().getMonth();
      let currentYear = new Date().getFullYear();
      let currentVideoNumber = 0;
+     let currentView = "home";
      //loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
     tabViewTitleMonthElement.innerHTML = "Calendar: " + MONTHS[currentMonth] + "," + currentYear;
     tabViewTitleVideoElement.innerHTML = "Video: Bhagavad Gita";
@@ -429,18 +426,27 @@ span#moreClose {
     // Processing videos
     let nextVideoElement = document.querySelector(".nextVideo");
     nextVideoElement.addEventListener("click", function(event){
+      if(currentView == "gita")
       showVideo(++currentVideoNumber);
+      else if(currentView == "live")
+      showLiveDarshan(++currentVideoNumber);
     });
     let prevVideoElement = document.querySelector(".prevVideo");
     prevVideoElement.addEventListener("click", function(event){
       
-      showVideo(--currentVideoNumber);
+      if(currentView == "gita")
+      showVideo(--urrentVideoNumber);
+      else if(currentView == "live")
+      showLiveDarshan(--currentVideoNumber);
 
     });
     let homeVideoElement = document.querySelector(".homeVideo");
     homeVideoElement.addEventListener("click", function(event){
       currentVideoNumber = 0;
+      if(currentView == "gita")
       showVideo(currentVideoNumber);
+      else if(currentView == "live")
+      showLiveDarshan(currentVideoNumber);
 
     });
     
@@ -457,12 +463,15 @@ span#moreClose {
        
     }
 
-    function showLiveDarshan(){
+    function showLiveDarshan(videoNumber){
+      if(videoNumber == undefined) 
+          videoNumber = 0;
+      console.log("showVideo: " + videoNumber) ;
       
       let videoElement = document.querySelector("#videoiframe");
       let data = JSON.parse(localStorage.getItem("live"));
-      tabViewTitleVideoElement.innerHTML = JSON.parse(data).live[1]["message"];
-      videoElement.src = JSON.parse(data).live[1]["link"];
+      tabViewTitleVideoElement.innerHTML = JSON.parse(data).live[videoNumber]["message"];
+      videoElement.src = JSON.parse(data).live[videoNumber]["link"];
      
 
     }
@@ -537,8 +546,6 @@ span#moreClose {
 
     }
 
-    
-
     //Menu- Container Views Change 
     let homeElement = document.querySelector(".home");
     let gitaElement = document.querySelector(".gita");
@@ -554,6 +561,7 @@ span#moreClose {
 
     
     homeElement.addEventListener("click", function(event){
+      currentView = "home";
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('hide');
       templeViewElement.classList.add('show');
@@ -566,6 +574,8 @@ span#moreClose {
     });
     gitaElement.addEventListener("click", function(event){
       loadData(showVideo, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "video");
+      currentView = "gita";
+      currentVideoNumber = 0;
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('show');
       templeViewElement.classList.add('hide');
@@ -578,6 +588,8 @@ span#moreClose {
     });
     liveDarshanElement.addEventListener("click", function(event){
       loadData(showLiveDarshan, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/live", "live");
+      currentView = "live";
+      currentVideoNumber = 0 ;
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('show');
       templeViewElement.classList.add('hide');
@@ -593,6 +605,8 @@ span#moreClose {
 
     calendarElement.addEventListener("click", function(event){
       loadData(showCalendar, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data", "calendar");
+      currentView = "calendar";
+      currentVideoNumber = 0 ;
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('show');
       templeViewElement.classList.add('hide');
@@ -605,6 +619,8 @@ span#moreClose {
     });
     
     backCalendarElement.addEventListener("click", function(event){
+      currentView = "home";
+      currentVideoNumber = 0;
       //headerContainer.style.width = "0%";
       console.log("backElement :click");
       templeViewElement.classList.remove('hide');
@@ -617,6 +633,8 @@ span#moreClose {
     });
 
     backVideoElement.addEventListener("click", function(event){
+      currentView = "home";
+      currentVideoNumber = 0 ;
       //headerContainer.style.width = "0%";
       console.log("backElement :click");
       templeViewElement.classList.remove('hide');

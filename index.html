@@ -458,10 +458,11 @@ span#moreClose {
     }
 
     function showLiveDarshan(){
-      tabViewTitleVideoElement.innerHTML = "Live: Sai Baba Darshan , Shirdi";
+      
       let videoElement = document.querySelector("#videoiframe");
-      let data = JSON.parse(localStorage.getItem("video"));
-      videoElement.src = "https://sai-baba.in/sai-baba-live-darshan/";
+      let data = JSON.parse(localStorage.getItem("live"));
+      tabViewTitleVideoElement.innerHTML = JSON.parse(data).live[1]["message"];
+      videoElement.src = JSON.parse(data).live[1]["link"];
      
 
     }
@@ -576,7 +577,7 @@ span#moreClose {
       
     });
     liveDarshanElement.addEventListener("click", function(event){
-      loadData(showLiveDarshan, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/data1", "liveDarshan");
+      loadData(showLiveDarshan, "https://raw.githubusercontent.com/TempleGuru/templeinfo/main/live", "live");
       headerContainer.style.width = "0%";
       templeViewElement.classList.remove('show');
       templeViewElement.classList.add('hide');
